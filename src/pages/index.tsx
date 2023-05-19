@@ -7,6 +7,8 @@ import image2 from '../images/image-2.png';
 import image3 from '../images/image-3.png';
 import { FiShoppingBag } from 'react-icons/fi';
 import { useState } from 'react'
+import Cart from '@/components/Cart';
+import SectionOne from '@/components/SectionOne';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -43,27 +45,9 @@ export default function Home() {
 
   return (
     <>
-     <div className="flex flex-col w-full h-screen bg-slate-950 items-center justify-start">
-        <div className="flex justify-end w-full bg-slate-950/50 py-2 px-32">
-          <FiShoppingBag size={25} className='text-white'/>
-        </div>
-        <h1 className='
-          font-satisfy 
-          text-7xl
-          text-transparent
-          bg-gradient-to-b
-          from-slate-100 
-          to-white
-          bg-clip-text
-          text-bolder
-          '>
-          CYBER Store 
-        </h1>
-        <div className="flex flex-col text-lg font-prompt mb-8 w-full text-secondary opacity-95 text-center">
-          <p>  Procurando os melhores NFTs cyberpunk para amigos, colegas ou familiares?</p>
-          <p>Não procure mais! Compre aqui os melhores NFTs que você já viu!</p>
-          <p>Estamos anciosos para ter você.</p>
-        </div>
+     <div className="flex flex-col w-full h-full bg-slate-950 items-center justify-start">
+        <Cart/>
+        <SectionOne/>
         <div className="flex flex-col lg:flex-row items-center md:items-start gap-3 lg:gap-0 w-full bg-slate-900/50 justify-center lg:px-0">
              <h1 className='
               font-satisfy 
@@ -79,7 +63,7 @@ export default function Home() {
               '>
               Principais personagens:
             </h1>
-           <div className="flex h-full items-center justify-center py-3 px-8 w-full gap-2">
+           <div className="flex h-full self-center items-center justify-center py-3 px-8 w-full gap-2">
             <Button onClick={()=> setView("girl")} color='sky'>
               CYBER GIRL
             </Button>
@@ -88,7 +72,7 @@ export default function Home() {
             </Button>
             <Button onClick={()=> setView("guy")} color='green'>
               CYBER GUY
-            </Button>
+            </Button>  
         </div>
         </div>
         <div className="flex flex-nowrap w-full h-full overflow-x-auto">
@@ -100,6 +84,7 @@ export default function Home() {
                                                               image={card.image}
                                                               price={card.price}
                                                               selected={view == card.type}
+                                                              type={card.type}
                                                               />)
            }
         </div>

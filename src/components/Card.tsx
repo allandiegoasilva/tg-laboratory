@@ -5,7 +5,8 @@ import { Inter } from 'next/font/google'
 import { FiShoppingBag } from 'react-icons/fi';
 import { Variant, Variants, motion } from 'framer-motion';
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { CartContext } from '@/@hooks/CartProvider';
 
 export interface ICard {
   image: any;
@@ -14,12 +15,14 @@ export interface ICard {
   description: string;
   title: string;
   selected?: boolean;
-  type?: string;
+  type: string;
 }
 
-export default function Card({ image, color, description, price, title, selected = false } : ICard) {
+export default function Card({ image, color, description, price, title, selected = false, type } : ICard) {
 
   const [showBlur, setShowBlur] = useState(false);
+
+  const { addCart, removeCart, cart } = useContext(CartContext);
 
   const variants : Variants = {
     show: {
@@ -40,7 +43,8 @@ export default function Card({ image, color, description, price, title, selected
 
   const linerBg = 'to-' + color + '-500/5'; 
   const shadow  = "shadow-"+color+"-500";
-  console.log(shadow);
+
+
   return (
     <motion.div 
 
@@ -132,14 +136,18 @@ export default function Card({ image, color, description, price, title, selected
                     transition
                     ease-in-out
                     duration-200
-                    text-secondary 
-                    border-secondary
+                  ${cart.includes(type) ? ' bg-white text-slate-950 ' : 'text-secondary border-secondary'}
                    `}
+
+                   onClick={() => {
+                      cart.includes(type)  ? removeCart(type) : addCart(type)
+                    }}
                   >
                     <FiShoppingBag size={25}/>
                   </button>
                   <button 
                     type={'button'} 
+                    
                     className={`
                       flex 
                       items-center 
