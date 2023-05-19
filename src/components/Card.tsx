@@ -47,14 +47,28 @@ export default function Card({ image, color, description, price, title, selected
   const btnShadowColor = "shadow-" + color + '-500/50';
   const textPriceColor = 'text-' +color+'-500';
 
-  const colors = {
+  const colors : any = {
     pink: {
       linerBg: 'to-pink-500/5',
       shadow: 'shadow-pink-500',
       btnBgColor: 'bg-pink-500',
       btnShadowColor: 'shadow-pink-500/50',
       textPriceColor: 'text-pink-500'
-    }
+    },
+    purple: {
+      linerBg: 'to-purple-500/5',
+      shadow: 'shadow-purple-500',
+      btnBgColor: 'bg-purple-500',
+      btnShadowColor: 'shadow-purple-500/50',
+      textPriceColor: 'text-purple-500'
+    },
+    sky: {
+      linerBg: 'to-sky-500/5',
+      shadow: 'shadow-sky-500',
+      btnBgColor: 'bg-sky-500',
+      btnShadowColor: 'shadow-sky-500/50',
+      textPriceColor: 'text-sky-500'
+    },
   }
 
   return (
@@ -79,7 +93,7 @@ export default function Card({ image, color, description, price, title, selected
         h-full
         relative
         from-slate-950 
-        ${colors['pink'].linerBg}
+        ${colors[color].linerBg}
 
         items-center px-8 pb-8 
        ${ selected ? 'opacity-100' : 'opacity-10'}
@@ -126,7 +140,7 @@ export default function Card({ image, color, description, price, title, selected
                   <p className='max-w-sm text-secondary  font-medium font-prompt mb-10'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, architecto sapiente. Enim quos molestiae nihil at nisi similique assumenda vel totam...
                 </p>
-                <span className={`font-extrabold text-4xl font-satisfy ${textPriceColor}`}>
+                <span className={`font-extrabold text-4xl font-satisfy ${colors[color].textPriceColor}`}>
                   R$ {price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
                 </span>
                </div>
@@ -170,12 +184,12 @@ export default function Card({ image, color, description, price, title, selected
                       text-xs
                       font-prompt
                       uppercase
-                      ${ btnBgColor}
+                      ${ colors[color].btnBgColor}
                   
                       text-white
                       shadow-sm
 
-                     ${btnShadowColor} 
+                     ${colors[color].btnShadowColor} 
                       font-semibold
                       transition
                       ease-in-out
