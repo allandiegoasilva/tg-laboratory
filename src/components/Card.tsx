@@ -43,7 +43,19 @@ export default function Card({ image, color, description, price, title, selected
 
   const linerBg = 'to-' + color + '-500/5'; 
   const shadow  = "shadow-"+color+"-500";
+  const btnBgColor = "bg-"+color+"-500";
+  const btnShadowColor = "shadow-" + color + '-500/50';
+  const textPriceColor = 'text-' +color+'-500';
 
+  const colors = {
+    pink: {
+      linerBg: 'to-pink-500/5',
+      shadow: 'shadow-pink-500',
+      btnBgColor: 'bg-pink-500',
+      btnShadowColor: 'shadow-pink-500/50',
+      textPriceColor: 'text-pink-500'
+    }
+  }
 
   return (
     <motion.div 
@@ -67,12 +79,11 @@ export default function Card({ image, color, description, price, title, selected
         h-full
         relative
         from-slate-950 
-        ${linerBg}
+        ${colors['pink'].linerBg}
 
         items-center px-8 pb-8 
        ${ selected ? 'opacity-100' : 'opacity-10'}
       `}>
-
             <div onMouseEnter={() => setShowBlur(true)} onMouseLeave={() => setShowBlur(false)}  className="flex justify-center items-center w-auto relative ">
               <Image  src={image} className={`transition ease-in-out duration-300 shadow-lg MIN-W-FIT ${selected && shadow} ${ selected && 'scale-105'} `} alt=''/>
               <motion.div
@@ -115,7 +126,7 @@ export default function Card({ image, color, description, price, title, selected
                   <p className='max-w-sm text-secondary  font-medium font-prompt mb-10'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, architecto sapiente. Enim quos molestiae nihil at nisi similique assumenda vel totam...
                 </p>
-                <span className={`font-extrabold text-4xl font-satisfy ${'text-' +color+'-500'}`}>
+                <span className={`font-extrabold text-4xl font-satisfy ${textPriceColor}`}>
                   R$ {price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
                 </span>
                </div>
@@ -136,7 +147,7 @@ export default function Card({ image, color, description, price, title, selected
                     transition
                     ease-in-out
                     duration-200
-                  ${cart.includes(type) ? ' bg-white text-slate-950 ' : 'text-secondary border-secondary'}
+                    ${cart.includes(type) ? ' bg-white text-slate-950 ' : 'text-secondary border-secondary'}
                    `}
 
                    onClick={() => {
@@ -159,12 +170,12 @@ export default function Card({ image, color, description, price, title, selected
                       text-xs
                       font-prompt
                       uppercase
-                      ${ "bg-"+color+"-500"}
+                      ${ btnBgColor}
                   
                       text-white
                       shadow-sm
 
-                     ${"shadow-" + color + '-500/50'} 
+                     ${btnShadowColor} 
                       font-semibold
                       transition
                       ease-in-out

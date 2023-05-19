@@ -3,6 +3,8 @@ import { Variants, useInView, motion } from "framer-motion";
 import { FiShoppingBag } from "react-icons/fi";
 import { useContext, useRef, useState, useEffect} from 'react';
 import { AiFillCloseCircle} from 'react-icons/ai';
+import Image from "next/image";
+import shoppingEmpty from '../images/shopping-bag.png';
 
 export default function Cart(){
 
@@ -17,9 +19,11 @@ export default function Cart(){
   const variants : Variants = {
     open: {
       display: "flex", 
+      opacity: 1,
       width: '100%'
     },
     close: {
+      opacity: 0,
       width: 0,
       transitionEnd: {
         display: 'none'
@@ -54,8 +58,7 @@ export default function Cart(){
           animate={open ? 'open' : 'close'}
           variants={variants}
           transition={{
-            ease: 'easeInOut',
-            duration: 0.3
+            ease: 'easeInOut'
           }}
         >
         <motion.div 
@@ -66,12 +69,22 @@ export default function Cart(){
             ease: 'easeInOut',
             duration: 0.3
           }}
-          className="absolute w-full h-full items-start bg-white z-10 px-3 py-4 lg:max-w-sm right-0 flex rounded-tl-xl">
+          className="absolute  flex-col w-full h-full items-start bg-white z-10 px-3 py-4 lg:max-w-sm right-0 flex rounded-tl-xl">
           <div className="flex w-full">
-            <button type="button" onClick={() => setOpen(false)} className="">
+            <button type="button" onClick={() => setOpen(false)} className="text-[#D9D9D9]">
               <AiFillCloseCircle size={35}/>
             </button>
+            <div className="flex justify-center items-center w-full text-xl font-bold text-zinc-950">
+              Seu carrinho
+            </div>
           </div>
+          <div className="flex flex-col h-full w-full py-8 items-center justify-center">
+            <Image src={shoppingEmpty} alt="Carrinho vazio"/>
+            <h3 className="text-zinc-950 uppercase font-bold">
+              Carrinho vazio!
+            </h3>
+          </div>
+        
         </motion.div>
       </motion.div>
     </>
