@@ -15,6 +15,7 @@ export default function handler(
       title: "Cyber Girl",
       description: "Descrição do cyber Guy",
       price: 199.90,
+      discount: 0.0,
       color: 'sky',
       image: '/img/image-3.png',
       type: 'girl'
@@ -23,6 +24,7 @@ export default function handler(
       title: "Cyber Robot",
       description: "Descrição do cyber Robot",
       price: 324.90,
+      discount: 0.0,
       color: 'purple',
       image: '/img/image-2.png',
       type: 'robot',
@@ -31,6 +33,7 @@ export default function handler(
       title: "Cyber Guy",
       description: "Descrição do cyber Gy",
       price: 159.90,
+      discount: 0.0,
       color: 'pink',
       image: '/img/image-1.png',
       type: 'guy'

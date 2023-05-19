@@ -18,7 +18,6 @@ export default function Home() {
   async function fetchProducts() {
     const { data } = await axios.get('/api/products');
 
-    console.log(data);
     setCards(data);
   }
 
@@ -58,10 +57,7 @@ export default function Home() {
         </div>
         </div>
         <div className="flex flex-nowrap w-full h-full overflow-x-auto">
-
-          
-           {
-            cards.map((card : ICard, index : number) => <Card key={index} 
+           { cards.map((card : ICard, index : number) => <Card key={index} 
                                                               title={card.title} 
                                                               description={card.description}
                                                               color={card.color}
@@ -69,8 +65,7 @@ export default function Home() {
                                                               price={card.price}
                                                               selected={view == card.type}
                                                               type={card.type}
-                                                              />)
-           }
+                                                              />)}
         </div>
      </div>
     </>
