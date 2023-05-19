@@ -1,47 +1,31 @@
 import { Inter } from 'next/font/google'
 import Card, { ICard } from '@/components/Card'
 import Button from '@/components/Button'
-
-import image1 from '../images/image-1.png';
-import image2 from '../images/image-2.png';
-import image3 from '../images/image-3.png';
-import { FiShoppingBag } from 'react-icons/fi';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Cart from '@/components/Cart';
 import SectionOne from '@/components/SectionOne';
+import axios from 'axios';
+import { ImSpinner6 } from 'react-icons/im';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
   const [view, setView] = useState("guy");
+  const [cards, setCards] = useState<ICard[]>([]);
+  
 
-  const cards : ICard[] = [
-    {
-      title: "Cyber Guy",
-      description: "Descrição do cyber Guy",
-      price: 199.90,
-      color: 'sky',
-      image: image1,
-      type: 'girl'
-    },
-    {
-      title: "Cyber Robot",
-      description: "Descrição do cyber Robot",
-      price: 324.90,
-      color: 'purple',
-      image: image2,
-      type: 'robot',
-    },
-    {
-      title: "Cyber Guy",
-      description: "Descrição do cyber Gy",
-      price: 159.90,
-      color: 'pink',
-      image: image3,
-      type: 'guy'
-    },
-  ];
+  async function fetchProducts() {
+    const { data } = await axios.get('/api/products');
+
+    console.log(data);
+    setCards(data);
+  }
+
+
+  useEffect(()=> {
+    fetchProducts();
+  }, []);
 
   return (
     <>
@@ -74,6 +58,8 @@ export default function Home() {
         </div>
         </div>
         <div className="flex flex-nowrap w-full h-full overflow-x-auto">
+
+          
            {
             cards.map((card : ICard, index : number) => <Card key={index} 
                                                               title={card.title} 

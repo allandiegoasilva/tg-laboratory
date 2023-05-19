@@ -99,7 +99,9 @@ export default function Card({ image, color, description, price, title, selected
        ${ selected ? 'opacity-100' : 'opacity-10'}
       `}>
             <div onMouseEnter={() => setShowBlur(true)} onMouseLeave={() => setShowBlur(false)}  className="flex justify-center items-center w-auto relative ">
-              <Image  src={image} className={`transition ease-in-out duration-300 shadow-lg MIN-W-FIT ${selected && shadow} ${ selected && 'scale-105'} `} alt=''/>
+              <div className="relative w-full h-[150px]">
+                 <img  src={image} className={`transition ease-in-out h-auto w-full duration-300 shadow-lg ${selected && shadow} ${ selected && 'scale-105'} `} alt=''/>
+              </div>
               <motion.div
               initial={'close'}
               animate={showBlur ? 'show' : 'close'}
