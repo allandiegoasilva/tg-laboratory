@@ -16,11 +16,13 @@ export default function Button(props : IButtonProps) {
   } = props;
 
 
-  let border = 'border-'+color+'-500';
-  let text = 'text-'+color+'-500';
+  const colors : any = {
+    pink:'text-pink-500 border-pink-500 shadow-pink-500/50',
+    purple:'text-purple-500 border-purple-500 shadow-purple-500/50',
+    sky: 'text-sky-500 border-sky-500 shadow-sky-500/50'
+  }
 
-  console.log(border);
-  console.log(text);
+  console.log(colors[color]);
 
   return (
     <button 
@@ -38,12 +40,12 @@ export default function Button(props : IButtonProps) {
         font-prompt
         uppercase
         border 
-        hover:${border}
-        hover:${text}
         transition
         ease-in-out
+        shadow     
+        hover:scale-105    
         duration-200
-        ${!selected ? 'text-secondary border-secondary' : (border + ' ' + text)}
+        ${selected ?  colors[color] : 'text-secondary border-secondary '}
       `}>
         { loading ?  "carregando" : children}
     </button>

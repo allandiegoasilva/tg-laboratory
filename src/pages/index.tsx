@@ -58,19 +58,17 @@ export default function Home() {
               from-slate-100 
               to-white
               bg-clip-text
-              text-bolder
-              
-              '>
+              text-bolder'>
               Principais personagens:
             </h1>
            <div className="flex h-full self-center items-center justify-center py-3 px-8 w-full gap-2">
-            <Button onClick={()=> setView("girl")} color='sky'>
+            <Button onClick={()=> setView("girl")} color='sky' selected={view == 'girl'}>
               CYBER GIRL
             </Button>
-             <Button onClick={()=> setView("robot")} color='red'>
+             <Button onClick={()=> setView("robot")} color='purple' selected={view == 'robot'}>
               CYBER ROBOT
             </Button>
-            <Button onClick={()=> setView("guy")} color='green'>
+            <Button onClick={()=> setView("guy")} color='pink' selected={view == 'guy'}>
               CYBER GUY
             </Button>  
         </div>
