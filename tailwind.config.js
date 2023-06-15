@@ -17,7 +17,10 @@ module.exports = {
     fontFamily: {
       'satisfy': ['Bebas Neue', 'sans-serif'],
       'prompt': ['Prompt', 'sans-serif'],
+<<<<<<< HEAD
       'secular': ['Secular One', 'sans-serif']
+=======
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
     }
   },
   plugins: [],

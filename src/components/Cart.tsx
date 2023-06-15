@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { CartContext, ICartContext } from "@/hooks/CartProvider";
+=======
+import { CartContext, ICartContext } from "@/@hooks/CartProvider";
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
 import { Variants, useInView, motion } from "framer-motion";
 import { FiShoppingBag } from "react-icons/fi";
 import { useContext, useRef, useState, useEffect} from 'react';
@@ -6,17 +10,30 @@ import { AiFillCloseCircle} from 'react-icons/ai';
 import { BsFillTrashFill} from 'react-icons/bs';
 import Image from "next/image";
 import shoppingEmpty from '../images/shopping-bag.png';
+<<<<<<< HEAD
 import { useRouter } from "next/router";
 
 export default function Cart(){
 
   const { cart, removeCart, totalCart } = useContext<ICartContext>(CartContext);
+=======
+import { ICard } from "./Card";
+import axios from "axios";
+
+export default function Cart(){
+
+  const { cart } = useContext<ICartContext>(CartContext);
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
   const ref = useRef(null);
   const inView = useInView(ref);
   const [viewMode, setViewMode] = useState<"sticky"|"fixed">('sticky');
   const [open, setOpen] = useState(false);
+<<<<<<< HEAD
 
   const router = useRouter();
+=======
+  const [cards, setCards] = useState<ICard[]>([]);
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
 
   const variants : Variants = {
     open: {
@@ -33,12 +50,26 @@ export default function Cart(){
     }
   }
 
+<<<<<<< HEAD
+=======
+  async function fetchProducts() {
+    const { data } = await axios.get('/api/products');
+
+    data.map((product : any) => {
+      if(cart.includes(product.type))
+        setCards([...cards, product]);
+    });
+  }
+
+
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
   useEffect(() => {
     if(inView)return setViewMode("sticky");
     
     setViewMode('fixed');
   },[inView]);
 
+<<<<<<< HEAD
 
   const colors : any = {
     pink: {
@@ -63,6 +94,11 @@ export default function Cart(){
       textPriceColor: 'text-sky-500'
     },
   }
+=======
+  useEffect(()=> {
+     fetchProducts();
+  },[]);
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
 
   return (
     <>
@@ -100,8 +136,13 @@ export default function Cart(){
           </div>
           
           {
+<<<<<<< HEAD
             cart.length  == 0 ? (
               <div className="flex flex-col flex-1 h-full w-full py-8 items-center justify-center">
+=======
+            cards.length  == 0 ? (
+              <div className="flex flex-col h-full w-full py-8 items-center justify-center">
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
                 <Image src={shoppingEmpty} alt="Carrinho vazio"/>
                 <h3 className="text-zinc-950 uppercase font-bold">
                   Carrinho vazio!
@@ -109,7 +150,11 @@ export default function Cart(){
               </div>
             ) : (
                <motion.div 
+<<<<<<< HEAD
                className="flex flex-col  flex-1 w-full py-8 items-center justify-start gap-3"
+=======
+               className="flex flex-col  w-full py-8 items-center justify-center gap-3"
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
                initial={{
                 opacity: 0
                }}
@@ -122,15 +167,23 @@ export default function Cart(){
                }}
                >
                   {
+<<<<<<< HEAD
                     cart.map((card) => (
                     <div key={card.type} className="flex p-2 rounded-lg w-full  border gap-2 hover:scale-105 transition ease-in-out duration-200 hover:shadow-lg">
                   
                       <div className="flex items-center">
                         <img src={card.image} className="w-28 h-24"/>
+=======
+                    cards.map((value) => (
+                    <div key={value.type} className="flex p-2 rounded-lg w-full  border gap-2">
+                      <div className="flex items-center">
+                        <img src={value.image} className="w-28 h-24"/>
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
                       </div>
                       <div className="flex flex-col w-full">
                         <div className="flex w-full justify-between font-semibold">
                           <span>
+<<<<<<< HEAD
                             {card.title}
                           </span>
                           <span className={`font-extrabold text-2xl font-satisfy ${colors[card.color].textPriceColor}`}>
@@ -138,6 +191,15 @@ export default function Cart(){
                           </span>
                           <span className="text-zinc-500 cursor-pointer">
                             <BsFillTrashFill size={25} onClick={() => removeCart(card.type)} className="text-red-500"/>
+=======
+                            {value.title}
+                          </span>
+                          <span>
+                            {value.price}
+                          </span>
+                          <span className="text-zinc-500 cursor-pointer">
+                            <BsFillTrashFill/>
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
                           </span>
                         </div>
                         <div className="flex w-full text-zinc-500">
@@ -150,6 +212,7 @@ export default function Cart(){
                </motion.div>
             )
           }
+<<<<<<< HEAD
          {
            cart.length > 0 && (
             <div className="flex flex-col items-center w-full justify-center gap-3">
@@ -163,6 +226,9 @@ export default function Cart(){
             </div>
            )
          }
+=======
+        
+>>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
         </motion.div>
       </motion.div>
     </>
