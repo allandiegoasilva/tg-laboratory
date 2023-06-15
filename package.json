@@ -9,17 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@stripe/stripe-js": "^1.54.0",
     "@types/node": "20.1.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "@types/react-input-mask": "^3.0.2",
-=======
-    "@types/node": "20.1.1",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
->>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
     "axios": "^1.4.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
@@ -28,10 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
-<<<<<<< HEAD
     "react-input-mask": "^2.0.4",
-=======
->>>>>>> 908a45eac4105e0cb91c205b1b195812bd207845
     "stripe": "^12.6.0",
     "typescript": "5.0.4"
   },
