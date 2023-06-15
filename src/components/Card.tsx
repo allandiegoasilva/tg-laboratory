@@ -7,6 +7,7 @@ import { useState, useContext } from 'react';
 import { CartContext } from '@/hooks/CartProvider';
 import { useRouter } from 'next/router';
 import { IProduct } from '@/types/IProduct';
+import axios from 'axios';
 
 export interface ICard {
   onClick?: () => void;
@@ -40,6 +41,13 @@ export default function Card({ product, selected = false, onClick = () => {} } :
     }
   }
 
+  const checkout = async (product : any) => {
+    const { data } = await axios.post('/api/checkout', {
+      products: [product]
+    });
+
+    console.log(data);
+  }
 
   return (
     <motion.div 
@@ -144,7 +152,7 @@ export default function Card({ product, selected = false, onClick = () => {} } :
                   </button>
                   <button 
                     type={'button'} 
-                    onClick={()=> router.push('/checkout?product=' + product.type)}
+                    onClick={()=> checkout(product)}
                     className={`
                       flex 
                       items-center 

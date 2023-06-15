@@ -7,6 +7,7 @@ import { BsFillTrashFill} from 'react-icons/bs';
 import Image from "next/image";
 import shoppingEmpty from '../images/shopping-bag.png';
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Cart(){
 
@@ -31,6 +32,14 @@ export default function Cart(){
         display: 'none'
       }
     }
+  }
+
+  const checkout = async () => {
+    const { data } = await axios.post('/api/checkout', {
+      products: cart
+    });
+
+    console.log(data);
   }
 
   useEffect(() => {
@@ -157,7 +166,7 @@ export default function Cart(){
                 <span className="font-bold text-lg">Total</span>
                 <span className="text-sky-500 text-3xl font-semibold font-satisfy">R$ {totalCart.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</span>
               </div>
-              <button onClick={()=> router.push('/checkout')} className="flex flex-col font-satisfy text-white p-4 bg-black rounded-lg shadow-inner font-extrabold shadow-zinc-900">
+              <button onClick={()=> checkout()} className="flex flex-col font-satisfy text-white p-4 bg-black rounded-lg shadow-inner font-extrabold shadow-zinc-900">
                   FINALIZAR A COMPRA 
               </button>
             </div>
