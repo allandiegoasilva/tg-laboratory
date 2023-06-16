@@ -39,7 +39,9 @@ export default function Cart(){
       products: cart
     });
 
-    console.log(data);
+    if(data.success) {
+      router.push(data.uri);
+    }
   }
 
   useEffect(() => {

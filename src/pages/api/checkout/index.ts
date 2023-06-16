@@ -1,3 +1,4 @@
+import { IProduct } from '@/types/IProduct';
 import { STATUS_CODES } from 'http';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe';
@@ -10,6 +11,7 @@ export default async function handler(
 ) {
 
   let products = req.body.products;
+  let discount = false;
 
   if(req.body?.discount){
     if(isNaN(req.body?.discount)){
@@ -18,6 +20,8 @@ export default async function handler(
         message: "Informe um valor numério para o desconto."
       });
     }
+
+    discount = req.body.discount;
   }
 
   if(!Array.isArray(products)) {
@@ -27,45 +31,42 @@ export default async function handler(
     });
   }
 
-  /* const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: "2022-11-15"
-  }); */
+  });
 
- /*  const session = await stripe.checkout.sessions.create({
+
+  products = products.map((product: IProduct) => {
+
+    let price = product.price;
+
+    if(typeof discount == "number") {
+      price = price - ((discount / 100)  * price); 
+    }
+
+    let stripeProduct = {
+        price_data: {
+          currency: 'brl',
+          unit_amount: Math.floor(price * 100),
+          product_data: {
+            name: product.title,
+            description: product.description,
+            images: [process.env.BASE_URL + product.image],
+          },
+        },
+      quantity: 1,
+    };
+
+    return stripeProduct;
+  });
+
+  const session = await stripe.checkout.sessions.create({
     mode: "payment",
     payment_method_types: ['card'],
-    line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            unit_amount: 2000,
-            product_data: {
-              name: 'T-shirt',
-              description: 'Comfortable cotton t-shirt',
-              images: ['https://blog.portalpos.com.br/app/uploads/2022/09/licoes-do-futebol-768x432.jpg'],
-            },
-          },
-        quantity: 1,
-      },
-        {
-          price_data: {
-            currency: 'usd',
-            unit_amount: 0,
-            product_data: {
-              name: 'T-shirt',
-              description: 'Comfortable cotton t-shirt',
-              images: ['https://blog.portalpos.com.br/app/uploads/2022/09/licoes-do-futebol-768x432.jpg'],
-            },
-          },
-        quantity: 1,
-      },
-    ],
-   success_url: process.env.BASE_URL + '/success',
-   cancel_url: process.env.BASE_URL + '/cancel',
- }); */
+    line_items: products,
+    success_url: process.env.BASE_URL + '/success',
+    cancel_url: process.env.BASE_URL + '/cancel',
+ });
 
-
- 
-  let session = {};
-  res.status(200).json({ session });
+  res.status(200).json({ success: true, uri: session.url });
 }

@@ -46,7 +46,9 @@ export default function Card({ product, selected = false, onClick = () => {} } :
       products: [product]
     });
 
-    console.log(data);
+    if(data.success) {
+      router.push(data.uri);
+    }
   }
 
   return (
